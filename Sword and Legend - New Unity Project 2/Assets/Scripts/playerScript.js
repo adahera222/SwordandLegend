@@ -10,6 +10,7 @@ var enemy : GameObject;
 enemy = gameObject.FindWithTag("Enemy");
 var game : GameObject;
 game = gameObject.FindWithTag("GameController");
+var isIdle = true;
 
 var playerHealth : int;
 var playerStamina : int;
@@ -39,14 +40,19 @@ function Start () {
     audio7 = aSources[6];
     audio8 = aSources[7];
     audio9 = aSources[8];
+    //InvokeRepeating ("EnemyIdle", 0, 0.8);
 }
 
 function Update () {
-
+    if(isIdle == true && isBlocking == false && isDodging == false && isAttacking == false)
+    {
+		PlayerIdle();
+	}
 }
 
 function PlayerState(state)
 {
+	isIdle = false;
 	if((state == 0) && (isAttacking == false) && (playerStamina >= 30) && (isBlocking == false) && (isDodging == false) && (enemy.GetComponent(enemyScript).enemyHealth > 0) && (playerHealth > 0))
 	{
 		isAttacking = true;
@@ -119,11 +125,26 @@ function PlayerState(state)
 	
 }
 
+function PlayerIdle()
+{
+	isIdle = false;
+	if(game.GetComponent(BeginGame).playerWin == false && game.GetComponent(BeginGame).gameOver == false)
+	{
+		player.animation.Play("player_idle");
+	}
+}
+
+function playerIsIdle()
+{
+	isIdle = true;
+}
+
 function IdleState()
 {
 	isAttacking = false;
 	isBlocking = false;
 	isDodging = false;
+	isIdle = true;
 }
 
 function loseHealth(damage : int)
@@ -150,7 +171,7 @@ function loseAttackStamina()
 
 function recoverStamina()
 {
-	if((playerStamina < 100) && (isAttacking == false) && (isBlocking == false) && (isDodging == false))
+	if((playerStamina < 100) && (isAttacking == false))
 	{
 		playerStamina = playerStamina + 10;
 	}
@@ -187,6 +208,7 @@ function returnShield()
 	isBlocking = false;
 	shield.transform.position.y -= 1.0462;
     shield.transform.position.z += 1.09988;
+    playerIsIdle();
 }
 
 function weakBlock()
@@ -197,12 +219,3 @@ function weakBlock()
 	player.animation.Play("player_damaged");
 	weakState();
 }
-
-/**function failedDodge()
-{
-	if(playerStamina < 30)
-	{
-		player.animation.Play("player_damaged");
-		weakState();
-	}
-}*/

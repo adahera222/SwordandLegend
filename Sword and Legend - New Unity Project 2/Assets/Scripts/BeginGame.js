@@ -87,13 +87,58 @@ function OnGUI () {
 	GUI.Box (Rect (25,65,150,50), "Player Stamina: "+ player.GetComponent(playerScript).playerStamina + "");
 	GUI.Box (Rect (25,125,150,50), "Enemy Health: "+ enemy.GetComponent(enemyScript).enemyHealth + "");
 	
+	if (GUI.Button (Rect (900,05,100,40), "Mute/Unmute")) 
+    {
+			if(audio1.mute == false)
+			{
+				audio1.mute = true;
+			}
+    		else
+    		{
+    			audio1.mute = false;
+    		}
+    	
+	}
 	if (gameOver) 
 	{
     	GUI.Box(Rect(400,200, 200, 200), "Game Over!");
+    	
+    	if (GUI.Button (Rect (450,300,100,40), "Music")) 
+    	{
+			if(audio3.isPlaying)
+			{
+				audio3.Stop();
+			}
+    		else
+    		{
+    			audio3.Play();
+    		}
+    	
+		}
+	
+    	if (GUI.Button (Rect (460,250,80,40), "Retry")) 
+    	{
+			Application.LoadLevel (0);
+		}
     }
     if (playerWin) 
     {
     	GUI.Box(Rect(400,200, 200, 200), "You Win!!");
+    	if (GUI.Button (Rect (450,300,100,40), "Music")) 
+    	{
+    		if(audio2.isPlaying)
+			{
+			audio2.Stop();
+			}
+    		else
+    		{
+    			audio2.Play();
+    		}
+		}
+    	if (GUI.Button (Rect (460,250,80,40), "Continue")) 
+    	{
+			Application.LoadLevel (0);
+		}
     }
 }
 

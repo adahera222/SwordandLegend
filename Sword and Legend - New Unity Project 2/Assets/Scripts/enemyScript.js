@@ -10,6 +10,7 @@ player = gameObject.FindWithTag("Player");
 var game : GameObject;
 game = gameObject.FindWithTag("GameController");
 var enemyHealth : int;
+var isIdle = true;
 
 var audio1: AudioSource;
 var audio2: AudioSource;
@@ -28,15 +29,20 @@ function Start () {
     audio4 = aSources[3];
     audio5 = aSources[4];
     audio6 = aSources[5];
+    InvokeRepeating ("EnemyIdle", 0, 0.8);
 }
 
 function Update () {
-
+	if(isIdle == true && isInState == false)
+	{
+		EnemyIdle();
+	}
 }
 
 function EnemyState()
 {
 	isInState = true;
+	isIdle = false;
 	
     var enemyAttack = 100 * (Random.value);
  	if(enemyAttack >= 70)
@@ -58,12 +64,22 @@ function EnemyState()
  	}
 }
 
+function EnemyIdle()
+{
+	isIdle = false;
+	if(isInState == false && (game.GetComponent(BeginGame).playerWin == false && game.GetComponent(BeginGame).gameOver == false))
+	{
+		enemy.animation.Play("enemy_idle");
+	}
+}
+
 function IdleState()
 {
 	isInState = false;
 	isBlocking = false;
 	weakAttack = false;
 	strongAttack = false;
+	isIdle = true;
 }
 
 function blockedAttack()
