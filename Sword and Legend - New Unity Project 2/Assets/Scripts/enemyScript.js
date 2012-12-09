@@ -44,14 +44,14 @@ function EnemyState()
 	isInState = true;
 	isIdle = false;
 	
-    var enemyAttack = 100 * (Random.value);
- 	if(enemyAttack >= 70)
+    var enemyAttack = 10 * (Random.value);
+ 	if(enemyAttack >= 7)
  	{
  		weakAttack = true;
   		enemy.animation.Play("enemy_attack_1", PlayMode.StopAll);
   		audio3.Play();
  	}
- 	else if(enemyAttack >= 30)
+ 	else if(enemyAttack >= 3)
  	{
  		strongAttack = true;
   		enemy.animation.Play("enemy_attack_2", PlayMode.StopAll);
@@ -71,6 +71,11 @@ function EnemyIdle()
 	{
 		enemy.animation.Play("enemy_idle");
 	}
+}
+
+function isNotBlocking()
+{
+	isBlocking = false;
 }
 
 function IdleState()

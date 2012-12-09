@@ -40,13 +40,16 @@ function Start () {
     audio7 = aSources[6];
     audio8 = aSources[7];
     audio9 = aSources[8];
-    //InvokeRepeating ("EnemyIdle", 0, 0.8);
 }
 
 function Update () {
-    if(isIdle == true && isBlocking == false && isDodging == false && isAttacking == false)
+    if(isIdle == true && isBlocking == false && isDodging == false && isAttacking == false && playerHealth > 30 && playerStamina > 30)
     {
 		PlayerIdle();
+	}
+	else if(isIdle == true && isBlocking == false && isDodging == false && isAttacking == false && (playerHealth <= 30 || playerStamina <= 30))
+	{
+		PlayerTired();
 	}
 }
 
@@ -60,13 +63,13 @@ function PlayerState(state)
 		player.animation.Play("player_attack_1");
 		audio5.Play();
         var enemyBlock = 10 * (Random.value);
-        if((enemyBlock >= 7) && (enemy.GetComponent(enemyScript).isInState == false))
+        if((enemyBlock >= 6) && (enemy.GetComponent(enemyScript).isInState == false))
         {
         	enemy.GetComponent(enemyScript).blockedAttack();
         }
         else if(enemy.GetComponent(enemyScript).isBlocking == false)
         {
-        	enemy.GetComponent(enemyScript).loseHealth(15);
+        	//enemy.GetComponent(enemyScript).loseHealth(15);
         }
 	}
 	else if((state == 0) && (isAttacking == false) && (playerStamina < 30) && (isBlocking == false) && (isDodging == false) && (enemy.GetComponent(enemyScript).enemyHealth > 0) && (playerHealth > 0))
@@ -75,13 +78,13 @@ function PlayerState(state)
 		playerStamina = 0;
 		player.animation.Play("player_weakend_attack");
         var enemyB = 10 * (Random.value);
-        if((enemyB >= 3) && (enemy.GetComponent(enemyScript).isInState == false))
+        if((enemyB >= 2) && (enemy.GetComponent(enemyScript).isInState == false))
         {
         	enemy.GetComponent(enemyScript).blockedAttack();
         }
         else if(enemy.GetComponent(enemyScript).isBlocking == false)
         {
-        	enemy.GetComponent(enemyScript).loseHealth(5);
+        	//enemy.GetComponent(enemyScript).loseHealth(5);
         }
 	}
 	else if((state == 1) && (isAttacking == false) && (isDodging == false) && (isBlocking == false))
@@ -98,6 +101,7 @@ function PlayerState(state)
 	{
 		IdleState();
 		isDodging = true;
+		isIdle = false;
 		loseStamina(30);
 		player.animation.Play("player_dodge_left", PlayMode.StopAll);
 		audio3.Play();
@@ -106,6 +110,7 @@ function PlayerState(state)
 	{
 		IdleState();
 		isDodging = true;
+		isIdle = false;
 		loseStamina(30);
 		player.animation.Play("player_dodge_right", PlayMode.StopAll);
 		audio4.Play();
@@ -134,6 +139,11 @@ function PlayerIdle()
 	}
 }
 
+function PlayerTired()
+{
+	player.animation.Play("player_tired");
+}
+
 function playerIsIdle()
 {
 	isIdle = true;
@@ -149,13 +159,16 @@ function IdleState()
 
 function loseHealth(damage : int)
 {
-	playerHealth = playerHealth - damage;
-	player.animation.Play("player_damaged");
-	audio2.Play();
-	if(playerHealth <= 0)
+	if(enemy.GetComponent(enemyScript).enemyHealth > 0)
 	{
-		playerHealth = 0;
-		game.GetComponent(BeginGame).lose();
+		playerHealth = playerHealth - damage;
+		player.animation.Play("player_damaged");
+		audio2.Play();
+		if(playerHealth <= 0)
+		{
+			playerHealth = 0;
+			game.GetComponent(BeginGame).lose();
+		}
 	}
 }
 
@@ -181,7 +194,22 @@ function enemyPain()
 {
 	if(enemy.GetComponent(enemyScript).isBlocking == false)
 	{
+		enemy.GetComponent(enemyScript).loseHealth(15);
 		audio6.Play();
+	}
+	else
+	{
+		audio1.Play();
+		audio8.Play();
+	}
+}
+
+function enemyWeakPain()
+{
+	if(enemy.GetComponent(enemyScript).isBlocking == false)
+	{
+		audio6.Play();
+		enemy.GetComponent(enemyScript).loseHealth(5);
 	}
 	else
 	{
@@ -218,4 +246,9 @@ function weakBlock()
 	loseHealth(10);
 	player.animation.Play("player_damaged");
 	weakState();
+}
+
+function notDodging()
+{
+	isDodging = false;
 }
