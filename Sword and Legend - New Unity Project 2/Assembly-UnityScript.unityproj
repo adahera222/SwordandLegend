@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Level3.js" />
      <Compile Include="Assets\Scripts\Level4.js" />
      <Compile Include="Assets\Scripts\NextLevel.js" />
+     <Compile Include="Assets\Scripts\StartScreen.js" />
      <Compile Include="Assets\Scripts\enemyScript.js" />
      <Compile Include="Assets\Scripts\enemyScript2.js" />
      <Compile Include="Assets\Scripts\enemyScript3.js" />

@@ -54,13 +54,13 @@ function EnemyState()
   		enemy.animation.Play("enemy_attack_1", PlayMode.StopAll);
   		audio3.Play();
     }
- 	else if(enemyAttack >= 7)
+ 	else if(enemyAttack >= 5)
  	{
  		strongAttack = true;
-  		enemy.animation.Play("enemy_attack_2", PlayMode.StopAll);
+  		enemy.animation.Play("enemy_dw_attack_2", PlayMode.StopAll);
   		audio4.Play();
  	}
- 	else if(enemyAttack >= 3)
+ 	else if(enemyAttack >= 2)
  	{
  		comboAttack = true;
   		enemy.animation.Play("enemy_dw_attack_1", PlayMode.StopAll);
@@ -113,7 +113,8 @@ function loseHealth(damage : int)
 	enemyHealth = enemyHealth - damage;
 	if(isInState == false)
 	{
-		enemy.animation.Play("enemy_damaged", PlayMode.StopAll);
+		isInState = true;
+		enemy.animation.Play("enemy_damaged_dw", PlayMode.StopAll);
 	}
 	if(enemyHealth <= 0)
 	{
@@ -132,7 +133,7 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			player.GetComponent(playerScript2).loseHealth(20);
+			player.GetComponent(playerScript2).loseHealth(10);
 		}
 		else if(comboAttack == true)
 		{
@@ -147,9 +148,9 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			if(player.GetComponent(playerScript2).playerStamina >= 20)
+			if(player.GetComponent(playerScript2).playerStamina >= 10)
 			{
-				player.GetComponent(playerScript2).loseStamina(20);
+				player.GetComponent(playerScript2).loseStamina(10);
 			}
 		}
 		else if(comboAttack == true)
@@ -180,9 +181,9 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			if(player.GetComponent(playerScript2).playerStamina >= 20)
+			if(player.GetComponent(playerScript2).playerStamina >= 10)
 			{
-				player.GetComponent(playerScript2).loseStamina(20);
+				player.GetComponent(playerScript2).loseStamina(10);
 				audio2.Play();
 				audio5.Play();
 			}

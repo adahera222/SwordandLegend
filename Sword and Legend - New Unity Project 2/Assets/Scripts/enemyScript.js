@@ -99,6 +99,7 @@ function loseHealth(damage : int)
 	enemyHealth = enemyHealth - damage;
 	if(isInState == false)
 	{
+		isInState = true;
 		enemy.animation.Play("enemy_damaged", PlayMode.StopAll);
 	}
 	if(enemyHealth <= 0)

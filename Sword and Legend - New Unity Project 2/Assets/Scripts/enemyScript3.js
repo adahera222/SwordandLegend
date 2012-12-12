@@ -105,7 +105,8 @@ function loseHealth(damage : int)
 	enemyHealth = enemyHealth - damage;
 	if(isInState == false)
 	{
-		enemy.animation.Play("enemy_damaged", PlayMode.StopAll);
+		isInState = true;
+		enemy.animation.Play("enemy_damaged_th", PlayMode.StopAll);
 	}
 	if(enemyHealth <= 0)
 	{
@@ -120,7 +121,7 @@ function checkPlayerState()
 	{
 		if(weakAttack == true)
 		{
-			player.GetComponent(playerScript3).loseHealth(25);
+			player.GetComponent(playerScript3).loseHealth(15);
 		}
 		else if(strongAttack == true)
 		{

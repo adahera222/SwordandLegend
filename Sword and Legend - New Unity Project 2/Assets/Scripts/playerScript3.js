@@ -63,7 +63,7 @@ function PlayerState(state)
 		player.animation.Play("player_attack_1");
 		audio5.Play();
         var enemyBlock = 10 * (Random.value);
-        if((enemyBlock >= 7) && (enemy.GetComponent(enemyScript3).isInState == false))
+        if((enemyBlock >= 5) && (enemy.GetComponent(enemyScript3).isInState == false))
         {
         	enemy.GetComponent(enemyScript3).blockedAttack();
         }
@@ -195,7 +195,7 @@ function enemyPain()
 	if(enemy.GetComponent(enemyScript3).isBlocking == false)
 	{
 		audio6.Play();
-		enemy.GetComponent(enemyScript3).loseHealth(15);
+		enemy.GetComponent(enemyScript3).loseHealth(10);
 	}
 	else
 	{

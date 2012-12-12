@@ -20,7 +20,7 @@ var playerStaminaTexture : Texture2D;
 var playerStaminaBorder : Texture2D;
 
 function Start () {
-	InvokeRepeating ("EnemyMove", 3, 4);
+	InvokeRepeating ("EnemyMove", 1, 3.8);
 	InvokeRepeating ("Recover", 0, 1); 
 	
 	var aSources = GetComponents(AudioSource);
@@ -166,7 +166,7 @@ function OnGUI () {
     	
     	if (GUI.Button (Rect (480,300,100,40), "Quit Game")) 
     	{
-			Application.Quit();
+			Application.LoadLevel (0);
     	
 		}
 	
@@ -180,11 +180,11 @@ function OnGUI () {
     	GUI.Box(Rect(430,200, 200, 200), "You Win!!");
     	if (GUI.Button (Rect (480,300,100,40), "Quit Game")) 
     	{
-    		Application.Quit();
+    		Application.LoadLevel (0);
 		}
     	if (GUI.Button (Rect (490,250,80,40), "Continue")) 
     	{
-			Application.LoadLevel (0);
+			Application.LoadLevel (3);
 		}
     }
     

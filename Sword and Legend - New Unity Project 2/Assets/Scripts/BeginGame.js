@@ -32,6 +32,7 @@ function Start () {
 
 function Update () {
 	var player = gameObject.FindWithTag("Player");
+	
 	if ( Input.GetMouseButtonDown( 0 ) || Input.GetKey( "w" ))
     {
  		player.GetComponent(playerScript).PlayerState(0);
@@ -108,6 +109,7 @@ function Update () {
     {
     	visionLight.light.intensity = 5;
     }
+    
 }
 
 function EnemyMove()
@@ -166,13 +168,13 @@ function OnGUI () {
     	
     	if (GUI.Button (Rect (480,300,100,40), "Quit Game")) 
     	{
-			Application.Quit();
+			Application.LoadLevel (0);
     	
 		}
 	
     	if (GUI.Button (Rect (490,250,80,40), "Retry")) 
     	{
-			Application.LoadLevel (0);
+			Application.LoadLevel (1);
 		}
     }
     if (playerWin) 
@@ -180,11 +182,11 @@ function OnGUI () {
     	GUI.Box(Rect(430,200, 200, 200), "You Win!!");
     	if (GUI.Button (Rect (480,300,100,40), "Quit Game")) 
     	{
-    		Application.Quit();
+    		Application.LoadLevel (0);
 		}
     	if (GUI.Button (Rect (490,250,80,40), "Continue")) 
     	{
-			Application.LoadLevel (1);
+			Application.LoadLevel (2);
 		}
     }
     GUI.Label(Rect(12, 0, 50, 50), "Level 1");
