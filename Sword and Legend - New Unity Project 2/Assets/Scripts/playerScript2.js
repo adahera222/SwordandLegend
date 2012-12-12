@@ -252,3 +252,42 @@ function notDodging()
 {
 	isDodging = false;
 }
+
+function OnGUI()
+{
+	if(isAttacking == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+		}
+	}
+	
+	if(isBlocking == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			if(enemy.GetComponent(enemyScript2).weakAttack == true)
+			{
+				GUI.Label(Rect(230,270, 150, 50), "-10 Stamina");
+			}
+			else if(enemy.GetComponent(enemyScript2).strongAttack == true)
+			{
+				GUI.Label(Rect(230,270, 150, 50), "-20 Stamina");
+			}
+			else if(enemy.GetComponent(enemyScript2).comboAttack == true)
+			{
+				GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+			}
+		}
+	}
+	
+	if(isDodging == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+		}
+	}
+	
+}

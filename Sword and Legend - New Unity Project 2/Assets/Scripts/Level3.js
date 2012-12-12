@@ -20,8 +20,8 @@ var playerStaminaTexture : Texture2D;
 var playerStaminaBorder : Texture2D;
 
 function Start () {
-	InvokeRepeating ("EnemyMove", 1, 3.8);
-	InvokeRepeating ("Recover", 0, 1); 
+	InvokeRepeating ("EnemyMove", 1, 2.8);
+	InvokeRepeating ("Recover", 0, 0.8); 
 	
 	var aSources = GetComponents(AudioSource);
     audio1 = aSources[0];
@@ -188,11 +188,11 @@ function OnGUI () {
 		}
     }
     
-    GUI.Label(Rect(12, 0, 50, 50), "Level 3");
-    GUI.Box (Rect (12,18,130,20), "Player Health: "+player.GetComponent(playerScript3).playerHealth+"%");
-	GUI.DrawTexture(Rect(03,35,224,36), playerHealthBorder);
+    GUI.Label(Rect(12, 0, 50, 50), "Level 2");
+    GUI.Box (Rect (12,188,130,20), "Player Health: "+player.GetComponent(playerScript3).playerHealth+"%");
+	GUI.DrawTexture(Rect(03,205,224,36), playerHealthBorder);
 	var adjust : int = player.GetComponent(playerScript3).playerHealth * 2;
-	GUI.BeginGroup(Rect(15, 45,adjust,15));
+	GUI.BeginGroup(Rect(15, 215,adjust,15));
 	if(player.GetComponent(playerScript3).playerHealth > 30)
 	{
 		GUI.DrawTexture(Rect(0,0,290,15), playerHealthTexture);
@@ -203,9 +203,9 @@ function OnGUI () {
 	}
 	GUI.EndGroup();
 	
-	GUI.Box (Rect (472,Screen.height - 82,100,20), "Stamina: "+ player.GetComponent(playerScript3).playerStamina + "%");
-	GUI.DrawTexture(Rect(416,Screen.height - 65,215,36), playerStaminaBorder);
-	GUI.BeginGroup(Rect(425,Screen.height - 55, player.GetComponent(playerScript3).playerStamina*2,15));
+	GUI.Box (Rect (12,248,130,20), "Stamina: "+ player.GetComponent(playerScript3).playerStamina + "%");
+	GUI.DrawTexture(Rect(03,265,224,36), playerStaminaBorder);
+	GUI.BeginGroup(Rect(15, 275, player.GetComponent(playerScript3).playerStamina*2,15));
 	if(player.GetComponent(playerScript3).playerStamina >= 30)
 	{
 		GUI.DrawTexture(Rect(00,00,600,15), playerStaminaTexture);

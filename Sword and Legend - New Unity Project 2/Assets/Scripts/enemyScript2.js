@@ -133,7 +133,7 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			player.GetComponent(playerScript2).loseHealth(10);
+			player.GetComponent(playerScript2).loseHealth(20);
 		}
 		else if(comboAttack == true)
 		{
@@ -148,9 +148,9 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			if(player.GetComponent(playerScript2).playerStamina >= 10)
+			if(player.GetComponent(playerScript2).playerStamina >= 20)
 			{
-				player.GetComponent(playerScript2).loseStamina(10);
+				player.GetComponent(playerScript2).loseStamina(20);
 			}
 		}
 		else if(comboAttack == true)
@@ -181,9 +181,9 @@ function checkPlayerState()
 		}
 		else if(strongAttack == true)
 		{
-			if(player.GetComponent(playerScript2).playerStamina >= 10)
+			if(player.GetComponent(playerScript2).playerStamina >= 20)
 			{
-				player.GetComponent(playerScript2).loseStamina(10);
+				player.GetComponent(playerScript2).loseStamina(20);
 				audio2.Play();
 				audio5.Play();
 			}

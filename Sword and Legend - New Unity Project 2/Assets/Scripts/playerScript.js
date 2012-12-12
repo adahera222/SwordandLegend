@@ -2,6 +2,7 @@
 var isBlocking = false;
 var isAttacking = false;
 var isDodging = false;
+var blockedAttack = false;
 var player : GameObject;
 player = gameObject.FindWithTag("Player");
 var shield : GameObject;
@@ -158,7 +159,7 @@ function IdleState()
 }
 
 function loseHealth(damage : int)
-{
+{	
 	if(enemy.GetComponent(enemyScript).enemyHealth > 0)
 	{
 		playerHealth = playerHealth - damage;
@@ -251,4 +252,39 @@ function weakBlock()
 function notDodging()
 {
 	isDodging = false;
+}
+
+function OnGUI()
+{
+	if(isAttacking == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+		}
+	}
+	
+	if(isBlocking == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			if(enemy.GetComponent(enemyScript).weakAttack == true)
+			{
+				GUI.Label(Rect(230,270, 150, 50), "-20 Stamina");
+			}
+			else if(enemy.GetComponent(enemyScript).strongAttack == true)
+			{
+				GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+			}
+		}
+	}
+	
+	if(isDodging == true)
+	{
+		if(Time.deltaTime < 4)
+		{
+			GUI.Label(Rect(230,270, 150, 50), "-30 Stamina");
+		}
+	}
+	
 }
